@@ -11,20 +11,20 @@ public class Board {
     Random   random;
 
     // Allocation constructor
-    public Board(int height, int width) {
+    public Board(int height, int width, Random random) {
 
         this.height = height;
         this.width  = width;
         this.pipes  = new Pipe[height][width];
-        random      = new Random(System.currentTimeMillis());
+        this.random = random;
     }
 
-    // Spawn the pipes to fill up a board
-    public void fillPipes() {
+    // Spawn random pipes to fill up a board
+    public void randomPipes() {
 
         for (int i = 0; i < this.height; i++)
             for (int j = 0; j < this.width; j++)
-                this.pipes[i][j] = new Pipe(2, random);
+                this.pipes[i][j] = new Pipe(2, this.random);
     }
 
     // Check if the pipe arrangement is legal
@@ -54,6 +54,24 @@ public class Board {
         return true;
     }
 
+    // Compute the probability that a randomly generated board is legal
+    public double probabilityLegal(int repetitions) {
+
+        // Run the simulations for `repetitions` successes
+        int successes = 0;
+        int generations;
+
+        for (generations = 0; successes < repetitions; generations++) {
+
+            // Generate random board
+            this.randomPipes();
+
+            if (this.isLegal())
+                successes++;
+        }
+        return (double) repetitions / generations;
+    }
+
     @Override
     public String toString() {
 
@@ -76,22 +94,15 @@ public class Board {
     // The main attraction
     public static void main(String[] args) {
 
-        // Create a new board
+        // Create new board
         int height = 2;
         int width  = 2;
-        Board board = new Board(height, width);
+        Random random = new Random(System.currentTimeMillis());
+        Board board = new Board(height, width, random);
 
-        // Demonstrate the code
-        boolean success = false;
-        while (!success) {
-
-            // Arrange the pipes
-            board.fillPipes();
-            success = board.isLegal();
-
-            // Print whether board is legal
-            System.out.println("Is board legal: " +success);
-            System.out.println(board);
-        }
+        // Compute probability
+        int repetitions = 100;
+        System.out.println("Probability of legal board: " +
+                            board.probabilityLegal(repetitions) * 100 + " %.");
     }
 }
