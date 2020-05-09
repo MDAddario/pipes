@@ -45,10 +45,10 @@ public class Pipe {
         // Format output
         StringBuilder output = new StringBuilder();
 
-        if (faces[0][0]) output.append('T');
-        if (faces[0][1]) output.append('B');
-        if (faces[1][0]) output.append('L');
-        if (faces[1][1]) output.append('R');
+        if (faces[0][0]) output.append('^');
+        if (faces[0][1]) output.append('V');
+        if (faces[1][0]) output.append('<');
+        if (faces[1][1]) output.append('>');
 
         return output.toString();
     }

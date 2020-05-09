@@ -63,7 +63,6 @@ public class Board {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
 
-                output.append(" ");
                 output.append(this.pipes[i][j]);
                 output.append(" ");
             }
@@ -79,20 +78,19 @@ public class Board {
 
         // Create a new board
         int height = 2;
-        int width  = 3;
+        int width  = 2;
         Board board = new Board(height, width);
 
         // Demonstrate the code
-        int repetitions = 5;
-        for (int i = 0; i < repetitions; i++) {
+        boolean success = false;
+        while (!success) {
 
             // Arrange the pipes
             board.fillPipes();
+            success = board.isLegal();
 
             // Print whether board is legal
-            System.out.println("Is board legal: " + board.isLegal());
-
-            // Print board
+            System.out.println("Is board legal: " +success);
             System.out.println(board);
         }
     }
