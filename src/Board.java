@@ -73,4 +73,27 @@ public class Board {
 
         return output.toString();
     }
+
+    // The main attraction
+    public static void main(String[] args) {
+
+        // Create a new board
+        int height = 2;
+        int width  = 3;
+        Board board = new Board(height, width);
+
+        // Demonstrate the code
+        int repetitions = 5;
+        for (int i = 0; i < repetitions; i++) {
+
+            // Arrange the pipes
+            board.fillPipes();
+
+            // Print whether board is legal
+            System.out.println("Is board legal: " + board.isLegal());
+
+            // Print board
+            System.out.println(board);
+        }
+    }
 }

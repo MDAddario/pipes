@@ -22,7 +22,7 @@ public class Pipe {
             dimensions  [1] = random.nextInt(nDims);
             orientations[1] = random.nextInt(2);
         }
-        while (!(dimensions[0] == dimensions[1] && orientations[0] == orientations[1]));
+        while (dimensions[0] == dimensions[1] && orientations[0] == orientations[1]);
 
         // Set opening faces to true
         this.faces[dimensions[0]][orientations[0]] = true;
@@ -45,10 +45,10 @@ public class Pipe {
         // Format output
         StringBuilder output = new StringBuilder();
 
-        if      (faces[0][0]) output.append('T');
-        else if (faces[0][1]) output.append('B');
-        else if (faces[1][0]) output.append('L');
-        else if (faces[1][1]) output.append('R');
+        if (faces[0][0]) output.append('T');
+        if (faces[0][1]) output.append('B');
+        if (faces[1][0]) output.append('L');
+        if (faces[1][1]) output.append('R');
 
         return output.toString();
     }
