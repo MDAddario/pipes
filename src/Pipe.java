@@ -34,4 +34,22 @@ public class Pipe {
 
         return lowerPipe.faces[dimension][1] == higherPipe.faces[dimension][0];
     }
+
+    @Override
+    public String toString() {
+
+        // Only allow printing for nDim == 2
+        if (this.faces.length != 2)
+            throw new UnsupportedOperationException("Cannot print if spatial nDims not 2.");
+
+        // Format output
+        StringBuilder output = new StringBuilder();
+
+        if      (faces[0][0]) output.append('T');
+        else if (faces[0][1]) output.append('B');
+        else if (faces[1][0]) output.append('L');
+        else if (faces[1][1]) output.append('R');
+
+        return output.toString();
+    }
 }
